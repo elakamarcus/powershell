@@ -28,4 +28,3 @@ else {
   }
 }
 Write-Host $b "useraccounts updated."
-Write-Host "[X] Set-commands are commented out."

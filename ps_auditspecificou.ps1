@@ -11,8 +11,7 @@ function FormatOut {
 foreach ( $domain in $domains ) {
     $machines = @()
     #Replace <SPECIFIED> with what membership you are looking for.
-    $machines = get-adcomputer -Filter 'ObjectClass -eq "Computer"' -Properties Description, CanonicalName -server $domain |
-    ? {$_.DistinguishedName -like "*OU=<SPECIFIED>,*"}
+    $machines = get-adcomputer -Filter 'ObjectClass -eq "Computer"' -Properties Description, CanonicalName -server $domain | ? {$_.DistinguishedName -like "*OU=<SPECIFIED>,*"}
     foreach ( $machine in $machines ) {
         FormatOut $machine $domain
     }

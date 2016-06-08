@@ -2,15 +2,13 @@
   A man who has committed a mistake and does not correct it, is committing another mistake.
 #>
 
-#prepare
 $bundle = @()
 $b = 0
-#/prepare
 $global:newPassword = (Read-Host -Prompt "Provide New Password" -AsSecureString)
 
 function setPwdChange {
-	set-aduser -identity $args[0] -ChangePasswordAtLogon $true
-	write-host "[+] " $args[0] "must change password on next logon."
+  set-aduser -identity $args[0] -ChangePasswordAtLogon $true
+  write-host "[+] " $args[0] "must change password on next logon."
 }
 
 function NewPassword {
@@ -19,16 +17,15 @@ function NewPassword {
     setPwdChange $args[0]
 }
 
-#/run
 if (!$args[0] -or $args[1]) {
-    Write-Host "[!] Execute with input file as only parameter."	
+    Write-Host "[!] Execute with input file as only parameter."  
 }
 else {
     $bundle = get-content $args[0]
-	foreach($user in $bundle) {
-		NewPassword $user
-        $b += 1;
-	}
+  foreach($user in $bundle) {
+    NewPassword $user
+    $b += 1;
+  }
 }
 Write-Host $b "useraccounts updated."
 Write-Host "[X] Set-commands are commented out."

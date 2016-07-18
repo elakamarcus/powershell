@@ -27,7 +27,7 @@ function getSecLogs ($PCName) {
   Get-EventLog -LogName System -ComputerName $PCName | ?{ $_.EventID -eq 6006 -or $_.EventID -eq 6005} 
 }
 if (!$args[0]) {
-  Write-Host "[!] Execute with input file as only parameter."  
+  Write-Host "[!] Execute with machine name as parameter."  
   Write-Host "[+] Execute as $args[-1] ComputerName"
   Write-Host "[+] Optional parameter how many entries as single int, e.g. 10. Default is 5."
 }

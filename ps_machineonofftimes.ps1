@@ -35,7 +35,7 @@ if($args[1]) {
   $Global:list = $args[1]
 }
 try {
-  getSecLogs $args[0] | select -First $Global:list @{N="Type";E={GetBootTypeFromID $_.EventID}}, @{N="Time";E={$_.TimeGenerated}}    
+  getSecLogs $args[0] | select -First $Global:list @{N="Type";E={GetBootTypeFromID $_.EventID}}, @{N="Time";E={$_.TimeGenerated}} | ft -AutoSize
 }
 catch [System.Exception] {
     

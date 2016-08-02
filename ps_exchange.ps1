@@ -7,7 +7,7 @@ function formatOut {
 }
 
 $creds = get-credential
-(Replace RRR with your region)
+
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri  http://exchangesrv/PowerShell/ -Authentication Kerberos -Credential $creds
 Import-PSSession $Session
 #Get mailboxes that has an activesync connected device

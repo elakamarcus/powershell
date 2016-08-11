@@ -21,7 +21,12 @@ $SurfaceDevices = $Devices | ?{ $_.DeviceModel -like "*Surface* " } | select -Pr
 # Mailbox permissions for specific account:
 # Get-MailboxPermission -Identity SamAccoutName | ? {$_.User -match "SamAccoutName-regex"} | %{get-aduser -identity ($_.user.split("\")[1]) | select name}
 #
-
+# Get the folders and their size for specific user:
+# get-aduser -filter {name -like "*namehere*"} | %{Get-MailboxFolderStatistics -Identity $_.DistinguishedName } | select @{N="Folder";E={$_.Identity.replace("remove-eventual-ad-strings", "")}},ItemsInFolder,FolderSize | ft –AutoSize
+#
+# Get the size of the mailbox and number of items 
+# PS C:\WINDOWS\system32> get-aduser -filter {name -like "*namehere*"} | %{Get-MailboxStatistics -Identity $_.DistinguishedName } | select itemcount, totalitemsize | ft -AutoSize
+# 
 # Show what accounts are granted permission on mailbox Get-MailboxPermission -Identity <USERID> | select user
 #Get mailbox permissions and filter out system account. this will take a while.
 $mailboxPermissions = Get-Mailbox -ResultSize unlimited| Get-MailboxPermission | where {$_.user.tostring() -ne "NT AUTHORITY\SELF" -and $_.IsInherited -eq $false}

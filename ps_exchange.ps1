@@ -33,7 +33,7 @@ $mailboxPermissions = Get-Mailbox -ResultSize unlimited| Get-MailboxPermission |
 foreach($item in $mailboxPermissions) { 
     #This section need review based on the setup. Basically you want a user name or samaccountname.
     #below will take the last column of a string of columns separated by "/"
-    $item.Identity.Split("/")[$(($item.Identity.ToCharArray() | Where-Object {$_ -eq "/"}| Measure-Object).count)]
+    $owner = $item.Identity.Split("/")[$(($item.Identity.ToCharArray() | Where-Object {$_ -eq "/"}| Measure-Object).count)]
 
     #Same as bullet above
     if($item.User -match "regex for username") {
